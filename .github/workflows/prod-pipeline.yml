@@ -20,14 +20,11 @@ jobs:
               echo "Condition true"
               echo "{match}={true}" >> $GITHUB_OUTPUT
           fi
-      - name: check output
-        run: |
-          echo "$GITHUB_OUTPUT"
       - name: check output in a different way
         run: |
           echo "$MESSAGE"
         env:
-          MESSAGE: ${{join(steps.run_tests.outputs.*, '\n')}}
+          MESSAGE: ${{join(steps.check-tag.outputs.*, '\n')}}
       - name: Should run conditionally
         if: steps.check-tag.outputs.match == 'true'
         run: |
