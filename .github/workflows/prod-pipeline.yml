@@ -19,6 +19,12 @@ jobs:
           if [[ ${GITHUB_REF##*/} =~ ^202[0-9][0-1][0-9][0-3][0-9] ]]; then
               echo "{match}={true}" >> $GITHUB_OUTPUT
           fi
+      - name: check output
+        run: |
+          echo "$GITHUB_OUTPUT"
+      - name: check output in a different way
+        run: |
+          echo "$steps.check-tag.outputs.match"
       - name: Should run conditionally
         if: steps.check-tag.outputs.match == 'true'
         run: |
